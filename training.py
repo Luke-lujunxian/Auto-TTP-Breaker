@@ -63,16 +63,16 @@ def loadModel(path):
 
 
 def main():
-    train()
+    #train()
     test()
 
 
 def test():
-    model = loadModel("kilgariff_ngram_model_16000.pkl")
-    string = 'The term I'
+    model = loadModel("(char&int)kilgariff_ngram_model_16000.pkl")
+    string = 'The term '
     print(list(model.vocab))
     print(string)
-    print(str(model.score(',', context=string.split())))
+    print(str(model.score('</s>', context=tokenlize(string))))
     for i in range(65, 91):
         print(chr(i) + ': ' + str(model.score(chr(i), context=tokenlize(string))))
         print(chr(i + 32) + ': ' + str(model.score(chr(i + 32), context=tokenlize(string))))
